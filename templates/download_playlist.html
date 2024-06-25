@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Downloader</title>
+    <link type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="content">
+        <div class="list">
+            {% for video in videos %}
+                <div class="video-container">
+                    <img src="{{ video['thumbnail_url'] }}" class="video-thumbnail">
+                    <h5 class="video-title truncate">{{ video['title'] }}</h5>
+                    <form action="/download_playlist" method="post">
+                        <input type="submit" name="{{ video['video_url'] }}" value="Скачать" class="button download-button">
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+        <form action="/download_playlist" method="post">
+            <input type="submit" name='download_all' value=' Скачать все' class="button download-all">
+        </form>
+    </div>
+</body>
+</html>
