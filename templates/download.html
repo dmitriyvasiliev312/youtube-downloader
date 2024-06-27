@@ -16,13 +16,13 @@
             <img src="{{ thumbnail_url }}" class="video-thumbnail-1">
         </div>
         <div class="controls">
+            <p class="title-text">{{ video_title }}</p>
             <p>Выбрать разрешение и скачать видео.</p>
             <form action="/download" method="post">
                 <div style="display: flex;">
                     <input type="submit" name="download" value="Скачать видео" class="button btn-1">
                     <input type="submit" name="download_mp3" value="Скачать mp3" class="button btn-2">
                 </div>
-                <!-- <p class="text-1">Видео в 360p и  720p скачивается намного быстрее.</p> -->
                 <div>
                     {% for r in resolutions %}
                         {% if selected_resolution == r %}

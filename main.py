@@ -58,9 +58,9 @@ def download():
                     break  
 
     if 'resolution' in session:     
-        return render_template('download.html', thumbnail_url = video.video.thumbnail_url, video_title = f'videos\\{video.get_filename()}.mp4', video_id = video.get_id(), resolutions = video.get_resolutions(), selected_resolution = session['resolution'])
+        return render_template('download.html', video_title = video.get_title(), thumbnail_url = video.video.thumbnail_url, video_id = video.get_id(), resolutions = video.get_resolutions(), selected_resolution = session['resolution'],)
     else:
-        return render_template('download.html', thumbnail_url = video.video.thumbnail_url, video_title = f'videos\\{video.get_filename()}.mp4', video_id = video.get_id(), resolutions = video.get_resolutions(), selected_resolution = video.get_resolutions()[0])
+        return render_template('download.html', video_title = video.get_title(), thumbnail_url = video.video.thumbnail_url, video_id = video.get_id(), resolutions = video.get_resolutions(), selected_resolution = video.get_resolutions()[0])
 
 
 @app.route('/download_playlist', methods = ['POST', 'GET'])

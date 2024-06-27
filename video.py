@@ -24,7 +24,10 @@ class Video:
         return self.video.streams.get_highest_resolution().default_filename
     
     def get_mp3_filename(self):
-        return f'{self.video.streams.get_highest_resolution().default_filename[:-1]}3'    
+        return f'{self.video.streams.get_highest_resolution().default_filename[:-1]}3' 
+
+    def get_title(self):
+        return self.video_title   
         
     def get_resolutions(self, only_progressive = True) -> list:
         '''Returns list of available resolutions for this video.'''
@@ -70,6 +73,5 @@ class Video:
 
 
 # v = Video('https://youtu.be/K9FwzGv-gqk?si=ZRb7Fh6Th4BZ5Eci', r'C:\Users\Admin\Desktop\yt downloader 2.0\static\videos')
-# print(v.get_resolutions())
-# print(v.get_resolutions(only_progressive=False))
-# print(v.video.streams.get_by_resolution('720p'))
+# print(v.get_title())
+        
