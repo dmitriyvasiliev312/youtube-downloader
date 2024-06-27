@@ -21,7 +21,6 @@ def index():
             try:
                 playlist = Playlist(request.form['link'])
                 print(playlist.video_urls) #проверяем существует ли этот плейлист
-                print('успешно1')
                 session['url'] = request.form['link']
                 return redirect(url_for('download_playlist'))
             except:

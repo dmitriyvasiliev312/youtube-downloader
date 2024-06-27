@@ -26,13 +26,18 @@ class Video:
     def get_mp3_filename(self):
         return f'{self.video.streams.get_highest_resolution().default_filename[:-1]}3'    
         
-    def get_resolutions(self) -> list:
-        '''Возвращает список доступных разрешений для этого видео.'''
+    def get_resolutions(self, only_progressive = True) -> list:
+        '''Returns list of available resolutions for this video.'''
         all_resolutions = ['144p', '240p', '360p', '480p', '720p', '1080p', '1440p', '2160p']
         available_resolutions = []
-        for i in all_resolutions:
-            if self.video.streams.filter(resolution = i) != None:
-                available_resolutions.append(i)
+        if only_progressive:
+            for i in all_resolutions:
+                if self.video.streams.get_by_resolution(i):
+                    available_resolutions.append(i)
+        else:
+            for i in all_resolutions:
+                if any(self.video.streams.filter(resolution = i)):
+                    available_resolutions.append(i)
         return available_resolutions
 
     def download_video(self, resolution : str):
@@ -64,6 +69,7 @@ class Video:
         
 
 
-# v = Video('https://youtu.be/kOIAiIZEsh4?si=mZ41KsBMr7nAHUDk', r'C:\Users\Admin\Desktop\yt downloader 2.0\static\videos')
-# print(v.get_filename())
-
+# v = Video('https://youtu.be/K9FwzGv-gqk?si=ZRb7Fh6Th4BZ5Eci', r'C:\Users\Admin\Desktop\yt downloader 2.0\static\videos')
+# print(v.get_resolutions())
+# print(v.get_resolutions(only_progressive=False))
+# print(v.video.streams.get_by_resolution('720p'))
